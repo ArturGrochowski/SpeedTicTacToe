@@ -1,3 +1,21 @@
 <resources>
-    <string name="app_name">Speed Tic Tac Toe</string>
+    <string name="app_name">Speed TicTacToe</string>
+    <string name="image_button_3x3">imageButton3x3</string>
+    <string name="image_button_6x6">imageButton6x6</string>
+    <string name="image_button_9x9">imageButton9x9</string>
+    <string name="image_button_custom">imageButtonCustom</string>
+    <string name="image_button_players_4">imageButtonPlayers4</string>
+    <string name="image_button_players_3">imageButtonPlayers3</string>
+    <string name="image_button_players_2">imageButtonPlayers2</string>
+    <string name="image_button_players_5">imageButtonPlayers5</string>
+    <string name="image_button_players_6">imageButtonPlayers6</string>
+    <string name="image_button_start">imageButtonStart</string>
+    <string name="image_view_text_players">imageVievTextPlayers</string>
+    <string name="image_viev_players">imgViewPlayers</string>
+    <string name="TicTacToe">TicTacToe</string>
+    <string name="dark">Dark</string>
+    <string name="rowHint">1-99</string>
+    <string name="inLine">1-99</string>
+    <string name="popUpoX">x_in_popup_window</string>
+    <string name="okButton">ok_button</string>
 </resources>

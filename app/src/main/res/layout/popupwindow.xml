@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/pupup_background"
+    android:orientation="vertical"
+    android:weightSum="5"
+    android:id="@+id/popupWindow">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="2"
+                android:src="@drawable/in_a_raw">
+
+            </ImageView>
+
+            <EditText
+                android:id="@+id/textInARaw"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:maxLength="2"
+                android:textColor="@color/colorGray"
+                android:textSize="50sp"
+                android:layout_marginRight="25dp"
+                android:textStyle="bold">
+
+            </EditText>
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <EditText
+                android:id="@+id/textRawX"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:maxLength="2"
+                android:textColor="@color/colorGray"
+                android:textSize="50sp"
+                android:layout_marginLeft="25dp"
+                android:textStyle="bold">
+
+            </EditText>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="15dp"
+                android:src="@drawable/x_white"
+                android:contentDescription="@string/popUpoX">
+
+            </ImageView>
+
+            <EditText
+                android:id="@+id/textRawY"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:maxLength="2"
+                android:textColor="@color/colorGray"
+                android:textSize="50sp"
+                android:layout_marginRight="25dp"
+                android:textStyle="bold">
+
+            </EditText>
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:layout_weight="2">
+
+        <ImageButton
+            android:id="@+id/imageButtonOK"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/okButton"
+            android:scaleType="fitCenter"
+            android:padding="15dp"
+            android:background="@null">
+
+        </ImageButton>
+
+
+    </LinearLayout>
+
+</LinearLayout>

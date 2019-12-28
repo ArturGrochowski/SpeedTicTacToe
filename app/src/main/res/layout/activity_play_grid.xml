@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PlayGrid"
+    android:weightSum="10"
+    android:orientation="vertical"
+    android:background="@color/colorWhite"
+    android:id="@+id/playGridBackground">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="7"
+        android:layout_marginTop="5dp">
+
+        <ImageButton
+            android:id="@+id/imageButtonUndo"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/button_undo"
+            android:scaleType="fitCenter"
+            android:background="@null">
+        </ImageButton>
+
+        <ImageView
+            android:id="@+id/imageOrder1st"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingBottom="15dp"
+            android:paddingLeft="15dp"
+            android:background="@null">
+
+        </ImageView>
+
+
+        <ImageView
+            android:id="@+id/imageFistPlacePlayer"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingBottom="20dp"
+            android:paddingRight="20dp"
+            android:background="@null">
+
+        </ImageView>
+
+        <ImageButton
+            android:id="@+id/imageButtonCurrentShape"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ring"
+            android:scaleType="centerInside"
+            android:background="@null">
+        </ImageButton>
+
+        <ImageView
+            android:id="@+id/imageOrder2nd"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingBottom="15dp"
+            android:paddingLeft="15dp"
+            android:background="@null">
+
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/imageSecondPlacePlayer"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingBottom="20dp"
+            android:paddingRight="20dp"
+            android:background="@null">
+
+        </ImageView>
+
+        <ImageButton
+            android:id="@+id/imageButtonExit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/button_exit"
+            android:scaleType="fitCenter"
+            android:background="@null">
+        </ImageButton>
+
+    </LinearLayout>
+
+    <TableLayout
+        android:id="@+id/playFieldLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:layout_margin="20dp">
+
+
+    </TableLayout>
+
+</LinearLayout>
