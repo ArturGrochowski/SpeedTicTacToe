@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
@@ -48,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         MenuItem itemSwitch = menu.findItem(R.id.mySwitch);
         itemSwitch.setActionView(R.layout.use_switch);
         SwitchCompat sw = menu.findItem(R.id.mySwitch).getActionView().findViewById(R.id.action_switch);
-//        buttonStart.setBackgroundResource(R.drawable.button_go);
         sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
         @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -116,6 +116,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonPlayers4 = findViewById(R.id.imageButtonPlayers4);
         buttonPlayers5 = findViewById(R.id.imageButtonPlayers5);
         buttonPlayers6 = findViewById(R.id.imageButtonPlayers6);
+        buttonStart.setBackgroundResource(R.drawable.button_go);
+        buttonTimer.setBackgroundResource(R.drawable.klepsydra_light);
+        buttonStart.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        buttonTimer.setScaleType(ImageView.ScaleType.FIT_CENTER);
         button3x3.setOnClickListener(this);
         button6x6.setOnClickListener(this);
         button9x9.setOnClickListener(this);
@@ -190,7 +194,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.imageButtonTimer:
-                setTheTimer();
+                changeStateOfTimer();
                 break;
 
             case R.id.imageButtonStart:
@@ -204,6 +208,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void customSize(){
         Intent intentPopup = new Intent(this, Popup.class);
         startActivity(intentPopup);
+    }
+
+
+    private void changeStateOfTimer() {
+        setBackgroundMode();
+        if(buttonTimer.isSelected()){
+            buttonTimer.setSelected(false);
+
+        }else{
+            buttonTimer.setSelected(true);
+            setTheTimer();
+        }
     }
 
 

@@ -19,4 +19,5 @@
     <string name="popUpoX">x_in_popup_window</string>
     <string name="okButton">ok_button</string>
     <string name="image_button_timer">image_button_timer</string>
+    <string name="image_button_go">image_button_go</string>
 </resources>

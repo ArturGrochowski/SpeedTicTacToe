@@ -258,15 +258,14 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:gravity="center"
                 android:layout_weight="6">
 
             <ImageButton
                 android:id="@+id/imageButtonTimer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
                 android:background="#00FFFFFF"
-                android:src="@drawable/timer_button"
                 android:contentDescription="@string/image_button_timer"/>
 
             </LinearLayout>
@@ -282,8 +281,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#00FFFFFF"
-                android:src="@drawable/button_go"
-                android:contentDescription="@string/image_button_start"/>
+                android:contentDescription="@string/image_button_go"/>
 
             </LinearLayout>
 
