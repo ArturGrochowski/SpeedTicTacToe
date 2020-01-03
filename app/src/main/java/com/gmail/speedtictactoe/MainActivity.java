@@ -25,10 +25,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RadioButton buttonPlayers4;
     private RadioButton buttonPlayers5;
     private RadioButton buttonPlayers6;
+    private ImageButton buttonTimer;
     static int GRID_ROWS = 3;
     static int GRID_COLUMNS = 3;
     static int IN_A_LINE_TO_WIN = 3;
     static int NUMBER_OF_PLAYERS = 2;
+    static int TIMER_SECONDS = 3;
     static boolean DARK_MODE;
 
 
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         MenuItem itemSwitch = menu.findItem(R.id.mySwitch);
         itemSwitch.setActionView(R.layout.use_switch);
         SwitchCompat sw = menu.findItem(R.id.mySwitch).getActionView().findViewById(R.id.action_switch);
-        buttonStart.setBackgroundResource(R.drawable.button_start);
+//        buttonStart.setBackgroundResource(R.drawable.button_go);
         sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
         @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -77,7 +79,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button6x6.setBackgroundResource(R.drawable.button_6x6_dark);
         button9x9.setBackgroundResource(R.drawable.button_9x9_dark);
         buttonCustom.setBackgroundResource(R.drawable.button_custom_dark);
-        buttonStart.setBackgroundResource(R.drawable.button_start_dark);
+        buttonStart.setBackgroundResource(R.drawable.button_go_dark);
+        buttonTimer.setBackgroundResource(R.drawable.klepsydra_dark);
         buttonPlayers2.setBackgroundResource(R.drawable.button_players2_dark);
         buttonPlayers3.setBackgroundResource(R.drawable.button_players3_dark);
         buttonPlayers4.setBackgroundResource(R.drawable.button_players4_dark);
@@ -91,7 +94,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button6x6.setBackgroundResource(R.drawable.button_6x6);
         button9x9.setBackgroundResource(R.drawable.button_9x9);
         buttonCustom.setBackgroundResource(R.drawable.button_custom);
-        buttonStart.setBackgroundResource(R.drawable.button_start);
+        buttonStart.setBackgroundResource(R.drawable.button_go);
+        buttonTimer.setBackgroundResource(R.drawable.klepsydra_light);
         buttonPlayers2.setBackgroundResource(R.drawable.button_players2);
         buttonPlayers3.setBackgroundResource(R.drawable.button_players3);
         buttonPlayers4.setBackgroundResource(R.drawable.button_players4);
@@ -106,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button9x9 = findViewById(R.id.imageButton9x9);
         buttonCustom = findViewById(R.id.imageButtonCustom);
         buttonStart = findViewById(R.id.imageButtonStart);
+        buttonTimer = findViewById(R.id.imageButtonTimer);
         buttonPlayers2 = findViewById(R.id.imageButtonPlayers2);
         buttonPlayers3 = findViewById(R.id.imageButtonPlayers3);
         buttonPlayers4 = findViewById(R.id.imageButtonPlayers4);
@@ -116,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button9x9.setOnClickListener(this);
         buttonCustom.setOnClickListener(this);
         buttonStart.setOnClickListener(this);
+        buttonTimer.setOnClickListener(this);
         buttonPlayers2.setOnClickListener(this);
         buttonPlayers3.setOnClickListener(this);
         buttonPlayers4.setOnClickListener(this);
@@ -124,19 +130,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    private void startTheGame() {
-        Intent intentGame = new Intent(this, PlayGrid.class);
-        startActivity(intentGame);
-    }
-
-
-    private void customSize(){
-        Intent intentPopup = new Intent(this, Popup.class);
-        startActivity(intentPopup);
-    }
-
-
     public void onClick(View v) {
+
         switch (v.getId()) {
             case R.id.imageButton3x3:
                 GRID_ROWS = 3;
@@ -174,10 +169,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
 
-            case R.id.imageButtonStart:
-                startTheGame();
-                break;
-
             case R.id.imageButtonPlayers2:
                 NUMBER_OF_PLAYERS = 2;
                 break;
@@ -198,6 +189,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 NUMBER_OF_PLAYERS = 6;
                 break;
 
+            case R.id.imageButtonTimer:
+                setTheTimer();
+                break;
+
+            case R.id.imageButtonStart:
+                startTheGame();
+                break;
+
         }
     }
+
+
+    private void customSize(){
+        Intent intentPopup = new Intent(this, Popup.class);
+        startActivity(intentPopup);
+    }
+
+
+    private void setTheTimer() {
+        Intent intentTimer = new Intent(this, TimerClass.class);
+        startActivity(intentTimer);
+    }
+
+
+    private void startTheGame() {
+        Intent intentGame = new Intent(this, PlayGrid.class);
+        startActivity(intentGame);
+    }
+
 }

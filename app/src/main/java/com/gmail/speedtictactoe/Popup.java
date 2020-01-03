@@ -114,7 +114,7 @@ public class Popup extends Activity {
 
     private void setLightMode() {
         backgroundColor.setBackgroundResource(R.color.colorWhite);
-        imageButtonOK.setBackgroundResource(R.drawable.ok_button);
+        imageButtonOK.setBackgroundResource(R.drawable.button_ok_dark);
         imageButtonOK.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
     }
 

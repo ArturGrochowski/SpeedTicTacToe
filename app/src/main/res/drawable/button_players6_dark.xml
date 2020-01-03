@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:state_checked="true" android:drawable="@drawable/players6_no_ring" />
-    <item android:drawable="@drawable/players6_black_no_ring" />
+    <item android:state_checked="true" android:drawable="@drawable/btn_6_red_light" />
+    <item android:drawable="@drawable/btn_6_black_dark" />
 
 </selector>

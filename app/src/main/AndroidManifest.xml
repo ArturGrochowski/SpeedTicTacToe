@@ -21,6 +21,9 @@
         <activity android:name=".Popup"
             android:theme="@style/AppTheme.PopupTheme">
         </activity>
+        <activity android:name=".TimerClass"
+            android:theme="@style/AppTheme.PopupTheme">
+        </activity>
     </application>
 
 </manifest>

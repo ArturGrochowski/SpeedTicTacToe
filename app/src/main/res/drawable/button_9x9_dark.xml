@@ -2,6 +2,6 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <item android:state_checked="true" android:drawable="@drawable/button_red_9x9_no_ring" />
-    <item android:drawable="@drawable/button_black_9x9_no_ring2" />
+    <item android:state_checked="true" android:drawable="@drawable/btn_9x9_red_light" />
+    <item android:drawable="@drawable/btn_9x9_black" />
 </selector>

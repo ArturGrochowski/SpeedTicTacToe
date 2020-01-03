@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    android:weightSum="3"
+    android:padding="15dp"
+    android:id="@+id/timer">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/timerSecondText"
+        android:src="@drawable/seconds">
+
+    </ImageView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <RadioGroup
+            android:id="@+id/radioGroup1Seconds"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:id="@+id/timer1secButton"
+            android:background="@drawable/button_player1"
+            android:button="@null">
+
+        </RadioButton>
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:id="@+id/timer2secButton"
+            android:background="@drawable/button_players2"
+            android:button="@null">
+
+        </RadioButton>
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:id="@+id/timer3secButton"
+            android:background="@drawable/button_players3"
+            android:button="@null">
+
+        </RadioButton>
+
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <RadioGroup
+            android:id="@+id/radioGroup2Seconds"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:id="@+id/timer4secButton"
+            android:background="@drawable/button_players4"
+            android:button="@null">
+
+        </RadioButton>
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:id="@+id/timer5secButton"
+            android:background="@drawable/button_players5"
+            android:button="@null">
+
+        </RadioButton>
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:id="@+id/timer6secButton"
+            android:background="@drawable/button_players6"
+            android:button="@null">
+
+        </RadioButton>
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+
+</LinearLayout>

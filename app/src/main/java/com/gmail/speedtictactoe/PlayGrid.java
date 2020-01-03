@@ -144,7 +144,7 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
 
     private void setDarkMode(LinearLayout backgroundColor, TableLayout playFiledBackground) {
         backgroundColor.setBackgroundResource(R.color.colorBlack);
-        playFiledBackground.setBackgroundResource(R.color.colorLightGray);
+        playFiledBackground.setBackgroundResource(R.color.colorWhite);
         playFiledBackground.setPadding(-marginSize, -marginSize,-marginSize,-marginSize);
         buttonBackgroundColor = android.R.color.black;
     }
@@ -154,7 +154,7 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
         backgroundColor.setBackgroundResource(R.color.colorWhite);
         playFiledBackground.setBackgroundResource(R.color.colorBlack);
         playFiledBackground.setPadding(-marginSize, -marginSize,-marginSize,-marginSize);
-        buttonBackgroundColor = android.R.color.white;
+        buttonBackgroundColor = R.color.colorWhite;
     }
 
 
@@ -396,12 +396,13 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
     private void setNextShapeButton(int player){
 
         if(lastPlayer){
-            nextShapeButton.setImageResource(R.drawable.restart_button);
+            nextShapeButton.setImageResource(R.drawable.restart_light);
 
         } else {
             nextShapeButton.setImageResource(imageChooserSwitch(player));
         }
     }
+
 
 
     private void undo() {
