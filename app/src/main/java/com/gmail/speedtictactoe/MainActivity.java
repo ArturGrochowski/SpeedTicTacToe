@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     static int NUMBER_OF_PLAYERS = 2;
     static int TIMER_SECONDS = 3;
     static boolean DARK_MODE;
+    static boolean TIMER_ON;
 
 
     @Override
@@ -215,9 +216,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setBackgroundMode();
         if(buttonTimer.isSelected()){
             buttonTimer.setSelected(false);
+            TIMER_ON = false;
 
         }else{
             buttonTimer.setSelected(true);
+            TIMER_ON = true;
             setTheTimer();
         }
     }
