@@ -153,16 +153,16 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
 
 
     private void setDarkMode(LinearLayout backgroundColor, TableLayout playFiledBackground) {
-        backgroundColor.setBackgroundResource(R.color.colorBlack);
+        backgroundColor.setBackgroundResource(R.color.colorDark);
         playFiledBackground.setBackgroundResource(R.color.colorLightGray);
         playFiledBackground.setPadding(-marginSize, -marginSize,-marginSize,-marginSize);
-        buttonBackgroundColor = android.R.color.black;
+        buttonBackgroundColor = R.color.colorDark;
     }
 
 
     private void setLightMode(LinearLayout backgroundColor, TableLayout playFiledBackground) {
         backgroundColor.setBackgroundResource(R.color.colorWhite);
-        playFiledBackground.setBackgroundResource(R.color.colorBlack);
+        playFiledBackground.setBackgroundResource(R.color.colorDark);
         playFiledBackground.setPadding(-marginSize, -marginSize,-marginSize,-marginSize);
         buttonBackgroundColor = R.color.colorWhite;
     }

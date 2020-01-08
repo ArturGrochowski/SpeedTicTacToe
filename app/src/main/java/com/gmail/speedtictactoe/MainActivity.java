@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     static int GRID_COLUMNS = 3;
     static int IN_A_LINE_TO_WIN = 3;
     static int NUMBER_OF_PLAYERS = 2;
-    static int TIMER_SECONDS = 3;
+    static int TIMER_SECONDS = 7;
     static boolean DARK_MODE;
     static boolean TIMER_ON;
 
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         LinearLayout layout = findViewById(R.id.main_activity_layout);
 
         if(DARK_MODE){
-            layout.setBackgroundResource(R.color.colorBlack);
+            layout.setBackgroundResource(R.color.colorDark);
             setButtonsToDarkMode();
         } else {
             layout.setBackgroundResource(R.color.colorWhite);
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button9x9.setBackgroundResource(R.drawable.button_9x9_dark);
         buttonCustom.setBackgroundResource(R.drawable.button_custom_dark);
         buttonStart.setBackgroundResource(R.drawable.button_go_dark);
-        buttonTimer.setBackgroundResource(R.drawable.klepsydra_dark);
+        buttonTimer.setBackgroundResource(R.drawable.timer_dark);
         buttonPlayers2.setBackgroundResource(R.drawable.button_players2_dark);
         buttonPlayers3.setBackgroundResource(R.drawable.button_players3_dark);
         buttonPlayers4.setBackgroundResource(R.drawable.button_players4_dark);
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button9x9.setBackgroundResource(R.drawable.button_9x9);
         buttonCustom.setBackgroundResource(R.drawable.button_custom);
         buttonStart.setBackgroundResource(R.drawable.button_go);
-        buttonTimer.setBackgroundResource(R.drawable.klepsydra_light);
+        buttonTimer.setBackgroundResource(R.drawable.timer);
         buttonPlayers2.setBackgroundResource(R.drawable.button_players2);
         buttonPlayers3.setBackgroundResource(R.drawable.button_players3);
         buttonPlayers4.setBackgroundResource(R.drawable.button_players4);
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonPlayers5 = findViewById(R.id.imageButtonPlayers5);
         buttonPlayers6 = findViewById(R.id.imageButtonPlayers6);
         buttonStart.setBackgroundResource(R.drawable.button_go);
-        buttonTimer.setBackgroundResource(R.drawable.klepsydra_light);
+        buttonTimer.setBackgroundResource(R.drawable.timer);
         buttonStart.setScaleType(ImageView.ScaleType.FIT_CENTER);
         buttonTimer.setScaleType(ImageView.ScaleType.FIT_CENTER);
         button3x3.setOnClickListener(this);
@@ -228,7 +228,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setTheTimer() {
         Intent intentTimer = new Intent(this, TimerClass.class);
-        startActivity(intentTimer);
+        startActivityForResult(intentTimer, 1);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+            setImageForTimerButton();
+    }
+
+
+    private void setImageForTimerButton() {
+        switch (TIMER_SECONDS){
+
+            case 7:
+                changeStateOfTimer();
+                break;
+
+            case 1:
+                buttonTimer.setBackgroundResource(R.drawable.button_timer_red_1);
+                break;
+
+            case 2:
+                buttonTimer.setBackgroundResource(R.drawable.button_timer_red_2);
+                break;
+
+            case 3:
+                buttonTimer.setBackgroundResource(R.drawable.button_timer_red_3);
+                break;
+
+            case 4:
+                buttonTimer.setBackgroundResource(R.drawable.button_timer_red_4);
+                break;
+
+            case 5:
+                buttonTimer.setBackgroundResource(R.drawable.button_timer_red_5);
+                break;
+
+            case 6:
+                buttonTimer.setBackgroundResource(R.drawable.button_timer_red_6);
+                break;
+
+        }
     }
 
 

@@ -26,7 +26,6 @@ public class TimerClass extends Activity implements View.OnClickListener {
         setWindowSize();
         setupButtons();
         setBackgroundMode();
-
     }
 
 
@@ -51,7 +50,6 @@ public class TimerClass extends Activity implements View.OnClickListener {
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
         int screenSize = (int) (displayMetrics.widthPixels * 0.8);
-//        int screenHeight = displayMetrics.heightPixels;
 
         getWindow().setLayout(screenSize,screenSize);
     }
@@ -68,7 +66,7 @@ public class TimerClass extends Activity implements View.OnClickListener {
 
 
     private void setDarkMode() {
-        backgroundColor.setBackgroundResource(R.color.colorBlack);
+        backgroundColor.setBackgroundResource(R.color.colorDark);
         seconds1Button.setBackgroundResource(R.drawable.button_player1_dark);
         seconds2Button.setBackgroundResource(R.drawable.button_players2_dark);
         seconds3Button.setBackgroundResource(R.drawable.button_players3_dark);
