@@ -20,7 +20,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="2"
-                android:src="@drawable/in_a_line">
+                android:src="@drawable/in_a_line_blue">
 
             </ImageView>
 
@@ -31,7 +31,7 @@
                 android:layout_weight="1"
                 android:inputType="number"
                 android:maxLength="2"
-                android:textColor="@color/colorGray"
+                android:textColor="@color/colorLightBlue"
                 android:textSize="50sp"
                 android:layout_marginRight="25dp"
                 android:textStyle="bold">
@@ -54,7 +54,7 @@
                 android:layout_weight="1"
                 android:inputType="number"
                 android:maxLength="2"
-                android:textColor="@color/colorGray"
+                android:textColor="@color/colorLightBlue"
                 android:textSize="50sp"
                 android:layout_marginLeft="25dp"
                 android:textStyle="bold">
@@ -66,7 +66,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="15dp"
-                android:src="@drawable/text_x"
+                android:src="@drawable/x_blue"
                 android:contentDescription="@string/popUpoX">
 
             </ImageView>
@@ -78,7 +78,7 @@
                 android:layout_weight="1"
                 android:inputType="number"
                 android:maxLength="2"
-                android:textColor="@color/colorGray"
+                android:textColor="@color/colorLightBlue"
                 android:textSize="50sp"
                 android:layout_marginRight="25dp"
                 android:textStyle="bold">

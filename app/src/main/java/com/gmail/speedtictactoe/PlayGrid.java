@@ -81,12 +81,22 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
 
     private void setupUndoButton() {
         imgButtonUndo = findViewById(R.id.imageButtonUndo);
+        setImageForUndoButton();
         imgButtonUndo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 undo();
             }
         });
+    }
+
+
+    private void setImageForUndoButton() {
+        if(MainActivity.TIMER_ON){
+//            imgButtonUndo.setBackgroundResource();
+        } else {
+            imgButtonUndo.setBackgroundResource(R.drawable.button_undo);
+        }
     }
 
 
@@ -144,7 +154,7 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
 
     private void setDarkMode(LinearLayout backgroundColor, TableLayout playFiledBackground) {
         backgroundColor.setBackgroundResource(R.color.colorBlack);
-        playFiledBackground.setBackgroundResource(R.color.colorWhite);
+        playFiledBackground.setBackgroundResource(R.color.colorLightGray);
         playFiledBackground.setPadding(-marginSize, -marginSize,-marginSize,-marginSize);
         buttonBackgroundColor = android.R.color.black;
     }

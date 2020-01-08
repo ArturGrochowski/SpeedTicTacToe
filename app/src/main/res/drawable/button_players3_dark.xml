@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:state_checked="true" android:drawable="@drawable/btn_3_red_light" />
-    <item android:drawable="@drawable/btn_3_black_dark" />
+    <item android:state_checked="true" android:drawable="@drawable/button_3_red" />
+    <item android:drawable="@drawable/button_3_gray" />
 </selector>
