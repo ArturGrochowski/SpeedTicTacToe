@@ -1,4 +1,4 @@
-package com.gmail.speedtictactoe;
+package com.arturgrochowski.speedtictactoe;
 
 
 import java.util.ArrayList;

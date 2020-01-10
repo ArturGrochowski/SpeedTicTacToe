@@ -1,4 +1,4 @@
-package com.gmail.speedtictactoe;
+package com.arturgrochowski.speedtictactoe;
 
 import android.app.Activity;
 import android.os.Bundle;

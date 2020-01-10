@@ -1,4 +1,4 @@
-package com.gmail.speedtictactoe;
+package com.arturgrochowski.speedtictactoe;
 
 import android.content.Context;
 
@@ -56,11 +56,8 @@ public class CustomButton extends android.support.v7.widget.AppCompatImageButton
         if(obj instanceof CustomButton){
             cb = (CustomButton) obj;
         }
-        if(this.getId() == cb.getId()){
-            return true;
-        } else {
-            return false;
-        }
+        assert cb != null;
+        return this.getId() == cb.getId();
     }
 
     @Override

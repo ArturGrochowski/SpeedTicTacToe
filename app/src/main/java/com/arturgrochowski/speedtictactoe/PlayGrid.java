@@ -1,4 +1,4 @@
-package com.gmail.speedtictactoe;
+package com.arturgrochowski.speedtictactoe;
 
 
 import android.content.res.Resources;
@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 
@@ -26,6 +27,7 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
     private ImageView order2ndPlace;
     private ImageView firstPlaceFor;
     private ImageView secondPlaceFor;
+    private ProgressBar progressBar;
     private boolean lastPlayer = false;
     private int rows;
     private int columns;
@@ -50,7 +52,7 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
         setContentView(R.layout.activity_play_grid);
         setRowsAndColumnsOrientation();
         createButtonsInArray2D();
-        setupUndoButton();
+        setupUndoButtonOrProgressBar();
         setupExitButton();
         setupNextShapeButton();
         setupImageViews1stAnd2ndPlaceOrders();
@@ -79,9 +81,18 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
     }
 
 
+    private void setupUndoButtonOrProgressBar() {
+        if(MainActivity.TIMER_ON){
+            setupProgressBar();
+        }else {
+            setupUndoButton();
+        }
+    }
+
+
     private void setupUndoButton() {
         imgButtonUndo = findViewById(R.id.imageButtonUndo);
-        setImageForUndoButton();
+        imgButtonUndo.setBackgroundResource(R.drawable.button_undo);
         imgButtonUndo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,12 +102,8 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
     }
 
 
-    private void setImageForUndoButton() {
-        if(MainActivity.TIMER_ON){
-//            imgButtonUndo.setBackgroundResource();
-        } else {
-            imgButtonUndo.setBackgroundResource(R.drawable.button_undo);
-        }
+    private void setupProgressBar() {
+        progressBar = new ProgressBar(this);
     }
 
 
@@ -275,13 +282,18 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
         setButtonImage(currentShape);
         tmpButton.setMyShape(currentShape);
         winningEngine.start(currentShape);
-        imgButtonUndo.setClickable(!winningEngine.getFlagDoesSomebodyWin());
+        setUndoButtonClickable();
         setAwards();
         skipWinners();
         checkIsTheGameOver();
         setNextShapeButton(nextPlayer);
         nextPlayer();
         nextShape();
+    }
+
+    private void setUndoButtonClickable() {
+        if(!MainActivity.TIMER_ON)
+        imgButtonUndo.setClickable(!winningEngine.getFlagDoesSomebodyWin());
     }
 
 
@@ -342,11 +354,11 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
                 resDrawableNumber = R.drawable.x;
                 break;
             case 3:
-                resDrawableNumber = R.drawable.trojkat;
+                resDrawableNumber = R.drawable.triangle;
                 break;
 
             case 4:
-                resDrawableNumber = R.drawable.kwadrat;
+                resDrawableNumber = R.drawable.square;
                 break;
 
             case 5:
@@ -354,7 +366,7 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
                 break;
 
             case 6:
-                resDrawableNumber = R.drawable.trapez;
+                resDrawableNumber = R.drawable.trapezoid;
                 break;
         }
 
