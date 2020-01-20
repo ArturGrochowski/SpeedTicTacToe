@@ -20,4 +20,10 @@
     <string name="okButton">ok_button</string>
     <string name="image_button_timer">image_button_timer</string>
     <string name="image_button_go">image_button_go</string>
+    <string name="firstPlaceImage">fistPlaceImage</string>
+    <string name="firstPlaceShapePlayer">player1srPlaceShape</string>
+    <string name="pictureOfCurrentPlayer">pictureOfCurrentPlayer</string>
+    <string name="secondPlaceImage">secondPlaceImage</string>
+    <string name="secondPlaceShapePlayer">player2ndPlaceShape</string>
+    <string name="buttonExit">buttonExit</string>
 </resources>

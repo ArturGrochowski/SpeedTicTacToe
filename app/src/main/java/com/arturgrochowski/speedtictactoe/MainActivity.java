@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
-import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -36,8 +35,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     static int TIMER_SECONDS = 7;
     static boolean DARK_MODE;
     static boolean TIMER_ON;
-    private List<View> allButtons;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,12 +82,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button9x9.setBackgroundResource(R.drawable.button_9x9_dark);
         buttonCustom.setBackgroundResource(R.drawable.button_custom_dark);
         buttonStart.setBackgroundResource(R.drawable.button_go_dark);
-        buttonTimer.setBackgroundResource(R.drawable.timer_dark);
+        setDarkModeForTimer();
         buttonPlayers2.setBackgroundResource(R.drawable.button_players2_dark);
         buttonPlayers3.setBackgroundResource(R.drawable.button_players3_dark);
         buttonPlayers4.setBackgroundResource(R.drawable.button_players4_dark);
         buttonPlayers5.setBackgroundResource(R.drawable.button_players5_dark);
         buttonPlayers6.setBackgroundResource(R.drawable.button_players6_dark);
+    }
+
+
+    private void setDarkModeForTimer() {
+        if(TIMER_ON){
+            setImageForTimerButton();
+        }else{
+            buttonTimer.setBackgroundResource(R.drawable.timer_dark);
+        }
     }
 
 
@@ -100,12 +106,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button9x9.setBackgroundResource(R.drawable.button_9x9);
         buttonCustom.setBackgroundResource(R.drawable.button_custom);
         buttonStart.setBackgroundResource(R.drawable.button_go);
-        buttonTimer.setBackgroundResource(R.drawable.timer);
+        setLightModeForTimer();
         buttonPlayers2.setBackgroundResource(R.drawable.button_players2);
         buttonPlayers3.setBackgroundResource(R.drawable.button_players3);
         buttonPlayers4.setBackgroundResource(R.drawable.button_players4);
         buttonPlayers5.setBackgroundResource(R.drawable.button_players5);
         buttonPlayers6.setBackgroundResource(R.drawable.button_players6);
+    }
+
+    private void setLightModeForTimer() {
+        if(TIMER_ON){
+            setImageForTimerButton();
+        }else{
+            buttonTimer.setBackgroundResource(R.drawable.timer);
+        }
     }
 
 
@@ -217,12 +231,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private void changeStateOfTimer() {
-        setBackgroundMode();
         if(buttonTimer.isSelected()){
             buttonTimer.setSelected(false);
             TIMER_ON = false;
-
+            setBackgroundMode();
         }else{
+            setBackgroundMode();
             buttonTimer.setSelected(true);
             TIMER_ON = true;
             setTheTimer();

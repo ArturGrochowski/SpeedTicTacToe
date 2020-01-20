@@ -18,17 +18,28 @@
         android:weightSum="7"
         android:layout_marginTop="5dp">
 
-        <ImageButton
-            android:id="@+id/imageButtonUndo"
+        <LinearLayout
+            android:id="@+id/slotForUndoButtonOrProgressBarLayout"
+            android:orientation="horizontal"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/button_undo"
-            android:scaleType="fitCenter"
-            android:background="@null">
-        </ImageButton>
+            android:layout_height="match_parent" >
+<!--
+            <ImageButton
+                android:id="@+id/imageButtonUndo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:visibility="invisible"
+                android:src="@drawable/button_undo"
+                android:scaleType="fitCenter">
+            </ImageButton>  -->
+
+        </LinearLayout>
+
 
         <ImageView
+            android:contentDescription="@string/firstPlaceImage"
             android:id="@+id/imageOrder1st"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -41,6 +52,7 @@
 
 
         <ImageView
+            android:contentDescription="@string/firstPlaceShapePlayer"
             android:id="@+id/imageFistPlacePlayer"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -52,6 +64,7 @@
         </ImageView>
 
         <ImageButton
+            android:contentDescription="@string/pictureOfCurrentPlayer"
             android:id="@+id/imageButtonCurrentShape"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -62,6 +75,7 @@
         </ImageButton>
 
         <ImageView
+            android:contentDescription="@string/secondPlaceImage"
             android:id="@+id/imageOrder2nd"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -73,6 +87,7 @@
         </ImageView>
 
         <ImageView
+            android:contentDescription="@string/secondPlaceShapePlayer"
             android:id="@+id/imageSecondPlacePlayer"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -84,6 +99,7 @@
         </ImageView>
 
         <ImageButton
+            android:contentDescription="@string/buttonExit"
             android:id="@+id/imageButtonExit"
             android:layout_width="0dp"
             android:layout_height="match_parent"

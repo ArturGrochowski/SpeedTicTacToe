@@ -1,19 +1,30 @@
 package com.arturgrochowski.speedtictactoe;
 
 
+import android.animation.ObjectAnimator;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Animatable;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.DrawableRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class PlayGrid extends AppCompatActivity implements View.OnClickListener {
@@ -41,6 +52,8 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
     private int buttonHeight;
     private int inLineToWin = MainActivity.IN_A_LINE_TO_WIN;
     private int numberOfPlayers = MainActivity.NUMBER_OF_PLAYERS;
+    int counter = 0;
+    private LinearLayout slotForUndoButtonOrProgressBar;
     private TableRow.LayoutParams tableRowParams;
     private WinningEngine winningEngine;
 
@@ -52,6 +65,7 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
         setContentView(R.layout.activity_play_grid);
         setRowsAndColumnsOrientation();
         createButtonsInArray2D();
+        findLinearLayoutForUndoButtonOrProgressBar();
         setupUndoButtonOrProgressBar();
         setupExitButton();
         setupNextShapeButton();
@@ -81,29 +95,62 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
     }
 
 
+    private void findLinearLayoutForUndoButtonOrProgressBar() {
+        slotForUndoButtonOrProgressBar = findViewById(R.id.slotForUndoButtonOrProgressBarLayout);
+    }
+
+
     private void setupUndoButtonOrProgressBar() {
         if(MainActivity.TIMER_ON){
-            setupProgressBar();
+            createAndSetupProgressBar();
         }else {
-            setupUndoButton();
+            createAndSetupUndoButton();
         }
     }
 
 
-    private void setupUndoButton() {
-        imgButtonUndo = findViewById(R.id.imageButtonUndo);
+    private void createAndSetupProgressBar() {
+        progressBar = new ProgressBar(this);
+//        progressBar.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+//        Drawable draw = getResources().getDrawable(R.drawable.progress_bar);
+//        progressBar.setIndeterminateDrawable(draw);
+
+//        Animation animation = new RotateAnimation(30, 170);
+//        animation.setDuration(10000);
+//        animation.start();
+//        progressBar.setAnimation(animation);
+
+        slotForUndoButtonOrProgressBar.addView(progressBar);
+        final Timer t = new Timer();
+        TimerTask tt = new TimerTask() {
+            @Override
+            public void run()
+            {
+                counter++;
+                progressBar.setProgress(counter);
+
+                if(counter == 100)
+                    t.cancel();
+            }
+        };
+
+        t.schedule(tt,0,100);
+
+    }
+
+
+    private void createAndSetupUndoButton() {
+        imgButtonUndo = new ImageButton(this);
+        imgButtonUndo.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        slotForUndoButtonOrProgressBar.addView(imgButtonUndo);
         imgButtonUndo.setBackgroundResource(R.drawable.button_undo);
+        imgButtonUndo.setScaleType(ImageView.ScaleType.FIT_CENTER);
         imgButtonUndo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 undo();
             }
         });
-    }
-
-
-    private void setupProgressBar() {
-        progressBar = new ProgressBar(this);
     }
 
 
