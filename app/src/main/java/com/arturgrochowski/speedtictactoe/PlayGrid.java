@@ -1,30 +1,22 @@
 package com.arturgrochowski.speedtictactoe;
 
 
-import android.animation.ObjectAnimator;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Animatable;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.DrawableRes;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.DecelerateInterpolator;
-import android.view.animation.RotateAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 public class PlayGrid extends AppCompatActivity implements View.OnClickListener {
@@ -52,7 +44,10 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
     private int buttonHeight;
     private int inLineToWin = MainActivity.IN_A_LINE_TO_WIN;
     private int numberOfPlayers = MainActivity.NUMBER_OF_PLAYERS;
-    int counter = 0;
+    private final int timeForMove = MainActivity.TIMER_SECONDS*1000;
+    private CountDownTimer brakeTimer;
+    private CountDownTimer moveTimer;
+    private LinearLayout backgroundColor;
     private LinearLayout slotForUndoButtonOrProgressBar;
     private TableRow.LayoutParams tableRowParams;
     private WinningEngine winningEngine;
@@ -110,32 +105,60 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
 
 
     private void createAndSetupProgressBar() {
-        progressBar = new ProgressBar(this);
-//        progressBar.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-//        Drawable draw = getResources().getDrawable(R.drawable.progress_bar);
-//        progressBar.setIndeterminateDrawable(draw);
-
-//        Animation animation = new RotateAnimation(30, 170);
-//        animation.setDuration(10000);
-//        animation.start();
-//        progressBar.setAnimation(animation);
-
+        progressBar = new ProgressBar(this, null,android.R.attr.progressBarStyleHorizontal);
+        progressBar.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        Drawable draw = getResources().getDrawable(R.drawable.progress_bar);
+        progressBar.setProgressDrawable(draw);
+        progressBar.setMax(timeForMove);
         slotForUndoButtonOrProgressBar.addView(progressBar);
-        final Timer t = new Timer();
-        TimerTask tt = new TimerTask() {
-            @Override
-            public void run()
-            {
-                counter++;
-                progressBar.setProgress(counter);
+        createAndSetupTimers();
+        moveTimer.start();
 
-                if(counter == 100)
-                    t.cancel();
+    }
+
+    private void createAndSetupTimers() {
+        moveTimer = new CountDownTimer(timeForMove,10) {
+            int moveTimerStarts = 0;
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                progressBar.setProgress((int)(timeForMove-millisUntilFinished));
+            }
+
+            @Override
+            public void onFinish() {
+
+                moveTimerStarts++;
+                System.out.println("moveTimerStarts = " + moveTimerStarts);
+//                progressBar.setProgress(timeForMove);
+                backgroundColor.setBackgroundResource(R.drawable.gradient_red);
+                setNextShapeButton(nextPlayer);
+                nextPlayer();
+                nextShape();
+                moveTimer.cancel();
+                brakeTimer.start();
             }
         };
 
-        t.schedule(tt,0,100);
+        brakeTimer = new CountDownTimer(500,500) {
+            int brakeTimerStarts = 0;
+            @Override
+            public void onTick(long millisUntilFinished) {
+                brakeTimerStarts++;
+            }
 
+            @Override
+            public void onFinish() {
+                System.out.println("breakTimerStarts = " + brakeTimerStarts);
+                if(MainActivity.DARK_MODE){
+                    backgroundColor.setBackgroundResource(R.color.colorDark);
+                } else {
+                    backgroundColor.setBackgroundResource(R.color.colorWhite);
+                }
+                brakeTimer.cancel();
+                moveTimer.start();
+            }
+        };
     }
 
 
@@ -159,6 +182,8 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
         imgButtonExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                moveTimer.cancel();
+                brakeTimer.cancel();
                 finish();
             }
         });
@@ -196,17 +221,17 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
 
 
     private void setBackgroundMode() {
-        LinearLayout backgroundColor = findViewById(R.id.playGridBackground);
+        backgroundColor = findViewById(R.id.playGridBackground);
         TableLayout playFiledBackground = findViewById(R.id.playFieldLayout);
         if(MainActivity.DARK_MODE){
-            setDarkMode(backgroundColor, playFiledBackground);
+            setDarkMode(playFiledBackground);
         } else {
-            setLightMode(backgroundColor, playFiledBackground);
+            setLightMode(playFiledBackground);
         }
     }
 
 
-    private void setDarkMode(LinearLayout backgroundColor, TableLayout playFiledBackground) {
+    private void setDarkMode(TableLayout playFiledBackground) {
         backgroundColor.setBackgroundResource(R.color.colorDark);
         playFiledBackground.setBackgroundResource(R.color.colorLightGray);
         playFiledBackground.setPadding(-marginSize, -marginSize,-marginSize,-marginSize);
@@ -214,7 +239,7 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
     }
 
 
-    private void setLightMode(LinearLayout backgroundColor, TableLayout playFiledBackground) {
+    private void setLightMode(TableLayout playFiledBackground) {
         backgroundColor.setBackgroundResource(R.color.colorWhite);
         playFiledBackground.setBackgroundResource(R.color.colorDark);
         playFiledBackground.setPadding(-marginSize, -marginSize,-marginSize,-marginSize);
@@ -336,6 +361,7 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
         setNextShapeButton(nextPlayer);
         nextPlayer();
         nextShape();
+        moveTimer.start();
     }
 
     private void setUndoButtonClickable() {
@@ -445,10 +471,14 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
         if(winningEngine.getListOfWinners().size() == numberOfPlayers-1 || numberOfMoves == rows * columns){
             nextShapeButton.setClickable(true);
             lastPlayer = true;
+            moveTimer.cancel();
+            brakeTimer.cancel();
         }
 
         if (winningEngine.getListOfWinners().size() >= numberOfPlayers){
             finishTheGame();
+            moveTimer.cancel();
+            brakeTimer.cancel();
         }
     }
 
