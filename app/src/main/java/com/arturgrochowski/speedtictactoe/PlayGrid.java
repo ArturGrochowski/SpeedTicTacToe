@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -118,47 +119,68 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
 
     private void createAndSetupTimers() {
         moveTimer = new CountDownTimer(timeForMove,10) {
-            int moveTimerStarts = 0;
-
             @Override
             public void onTick(long millisUntilFinished) {
                 progressBar.setProgress((int)(timeForMove-millisUntilFinished));
             }
-
             @Override
             public void onFinish() {
-
-                moveTimerStarts++;
-                System.out.println("moveTimerStarts = " + moveTimerStarts);
-//                progressBar.setProgress(timeForMove);
-                backgroundColor.setBackgroundResource(R.drawable.gradient_red);
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                brakeTimer.start();
+                moveTimer.cancel();
+                progressBar.setProgress(timeForMove);
+                setBackgroundColorToRed();
+                skipWinners();
                 setNextShapeButton(nextPlayer);
                 nextPlayer();
                 nextShape();
-                moveTimer.cancel();
-                brakeTimer.start();
+
+
             }
         };
 
         brakeTimer = new CountDownTimer(500,500) {
-            int brakeTimerStarts = 0;
             @Override
             public void onTick(long millisUntilFinished) {
-                brakeTimerStarts++;
             }
 
             @Override
             public void onFinish() {
-                System.out.println("breakTimerStarts = " + brakeTimerStarts);
-                if(MainActivity.DARK_MODE){
-                    backgroundColor.setBackgroundResource(R.color.colorDark);
-                } else {
-                    backgroundColor.setBackgroundResource(R.color.colorWhite);
-                }
-                brakeTimer.cancel();
-                moveTimer.start();
+                startMoveTimer();
             }
         };
+    }
+
+
+    private void setBackgroundColorToRed() {
+        if(MainActivity.DARK_MODE){
+            backgroundColor.setBackgroundResource(R.color.colorRedDark);
+
+        } else {
+            backgroundColor.setBackgroundResource(R.color.colorRedWhite);
+        }
+    }
+
+
+    private void startMoveTimer() {
+        setBackgroundColor();
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        moveTimer.cancel();
+        brakeTimer.cancel();
+        if(lastPlayer){
+            progressBar.setProgress(timeForMove);
+        }else {
+            moveTimer.start();
+        }
+    }
+
+
+    private void setBackgroundColor() {
+        if(MainActivity.DARK_MODE){
+            backgroundColor.setBackgroundResource(R.color.colorDark);
+        } else {
+            backgroundColor.setBackgroundResource(R.color.colorWhite);
+        }
     }
 
 
@@ -361,7 +383,7 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
         setNextShapeButton(nextPlayer);
         nextPlayer();
         nextShape();
-        moveTimer.start();
+        startMoveTimer();
     }
 
     private void setUndoButtonClickable() {
