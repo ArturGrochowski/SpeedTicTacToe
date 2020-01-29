@@ -1,6 +1,7 @@
 package com.arturgrochowski.speedtictactoe;
 
 
+import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -20,7 +22,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 
 
-public class PlayGrid extends AppCompatActivity implements View.OnClickListener {
+public class PlayGrid extends AppCompatActivity implements View.OnTouchListener {
 
     private ImageButton nextShapeButton;
     private ImageButton imgButtonUndo;
@@ -122,20 +124,20 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
             @Override
             public void onTick(long millisUntilFinished) {
                 progressBar.setProgress((int)(timeForMove-millisUntilFinished));
+                if(millisUntilFinished <= 25){
+                    getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                }
             }
             @Override
             public void onFinish() {
-                getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                brakeTimer.start();
-                moveTimer.cancel();
-                progressBar.setProgress(timeForMove);
-                setBackgroundColorToRed();
-                skipWinners();
-                setNextShapeButton(nextPlayer);
-                nextPlayer();
-                nextShape();
-
-
+                    brakeTimer.start();
+                    moveTimer.cancel();
+                    progressBar.setProgress(timeForMove);
+                    setBackgroundColorToRed();
+                    skipWinners();
+                    setNextShapeButton(nextPlayer);
+                    nextPlayer();
+                    nextShape();
             }
         };
 
@@ -163,14 +165,16 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
 
 
     private void startMoveTimer() {
-        setBackgroundColor();
-        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-        moveTimer.cancel();
-        brakeTimer.cancel();
-        if(lastPlayer){
-            progressBar.setProgress(timeForMove);
-        }else {
-            moveTimer.start();
+        if(moveTimer!=null) {
+            setBackgroundColor();
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+            moveTimer.cancel();
+            brakeTimer.cancel();
+            if (lastPlayer) {
+                progressBar.setProgress(timeForMove);
+            } else {
+                moveTimer.start();
+            }
         }
     }
 
@@ -204,8 +208,10 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
         imgButtonExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                moveTimer.cancel();
-                brakeTimer.cancel();
+                if(moveTimer!=null) {
+                    moveTimer.cancel();
+                    brakeTimer.cancel();
+                }
                 finish();
             }
         });
@@ -306,6 +312,7 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
     }
 
 
+    @SuppressLint("ClickableViewAccessibility")
     private CustomButton createAndSetupButton(TableRow.LayoutParams tableRowParams, int row, int col) {
         CustomButton button = new CustomButton(this);
         button.setLayoutParams(tableRowParams);
@@ -314,7 +321,7 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
         int buttonID = Integer.parseInt("9" + nameID);
         button.setId(buttonID);
         button.setBackgroundResource(buttonBackgroundColor);
-        button.setOnClickListener(this);
+        button.setOnTouchListener(this);
         button.setName(nameID);
         button.setImInRow(row);
         button.setImInColumn(col);
@@ -366,34 +373,38 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
     }
 
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
-    public void onClick(View v) {
-        movesCounter(1);
-        v.setClickable(false);
-        tmpButton = findViewById(v.getId());
-        assignTmpButtonHeightAndWidth();
-        lockButtonSizes();
-        setButtonImage(currentShape);
-        tmpButton.setMyShape(currentShape);
-        winningEngine.start(currentShape);
-        setUndoButtonClickable();
-        setAwards();
-        skipWinners();
-        checkIsTheGameOver();
-        setNextShapeButton(nextPlayer);
-        nextPlayer();
-        nextShape();
-        startMoveTimer();
-    }
-
-    private void setUndoButtonClickable() {
-        if(!MainActivity.TIMER_ON)
-        imgButtonUndo.setClickable(!winningEngine.getFlagDoesSomebodyWin());
+    public boolean onTouch(View v, MotionEvent event) {
+        if(event.getAction() == MotionEvent.ACTION_DOWN)
+            movesCounter(1);
+            v.setClickable(false);
+            tmpButton = findViewById(v.getId());
+            assignTmpButtonHeightAndWidth();
+            lockButtonSizes();
+            setButtonImage(currentShape);
+            tmpButton.setMyShape(currentShape);
+            winningEngine.start(currentShape);
+            setUndoButtonClickable();
+            setAwards();
+            checkIsTheGameOver();
+            skipWinners();
+            setNextShapeButton(nextPlayer);
+            nextPlayer();
+            nextShape();
+            startMoveTimer();
+        return false;
     }
 
 
     private void movesCounter(int add){
         numberOfMoves = numberOfMoves + add;
+    }
+
+
+    private void setUndoButtonClickable() {
+        if(!MainActivity.TIMER_ON)
+        imgButtonUndo.setClickable(!winningEngine.getFlagDoesSomebodyWin());
     }
 
 
@@ -493,11 +504,9 @@ public class PlayGrid extends AppCompatActivity implements View.OnClickListener 
         if(winningEngine.getListOfWinners().size() == numberOfPlayers-1 || numberOfMoves == rows * columns){
             nextShapeButton.setClickable(true);
             lastPlayer = true;
-            moveTimer.cancel();
-            brakeTimer.cancel();
         }
 
-        if (winningEngine.getListOfWinners().size() >= numberOfPlayers){
+        if (winningEngine.getListOfWinners().size() >= numberOfPlayers && moveTimer!=null){
             finishTheGame();
             moveTimer.cancel();
             brakeTimer.cancel();
